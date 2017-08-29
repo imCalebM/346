@@ -41,7 +41,6 @@ class GrammarRule {
      */
     func parse(input : String) -> String? {
         var remainingInput = input
-        
         // Note the labeled statement providing a target for "continue".
         // <unofficial> This may trigger a "ZOMG goto??" reaction, but hey the nested boolean if statement stuff is a faff! </unofficial>
         ruleLoop: for ruleChoice in rhs {

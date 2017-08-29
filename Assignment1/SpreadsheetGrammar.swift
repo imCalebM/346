@@ -62,4 +62,3 @@ class GRExpressionTail : GrammarRule {
         return nil
     }
 }
-

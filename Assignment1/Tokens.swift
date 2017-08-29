@@ -68,3 +68,20 @@ class GRLiteral : Token {
         super.init(regExpPattern: literal, options: NSRegularExpression.Options.ignoreMetacharacters )
     }
 }
+
+/// A Token subclass for parsing column labels
+class GRColumnLabel : Token {
+    init(columnLabel:String){
+        super.init(regExpPattern: "([A-Z]+(?!0-9))")
+    }
+}
+
+/// A Token subclass for parsing row numbers
+class GRRowNumber : Token {
+    init(rowNumber:String){
+        super.init(regExpPattern: "(?![A-Z])[0-9]+")
+    }
+}
+
+
+

@@ -70,6 +70,6 @@ if CommandLine.arguments.count>1 {
 
     print("--- Test GRSpreadsheet parsing")
     let mySpreadsheet = GRSpreadsheet()
-    testGrammarRule(rule: mySpreadsheet, input: " 1+ 3 ")
+    testGrammarRule(rule: mySpreadsheet, input: "A1 := 2")
     testGrammarRule(rule: mySpreadsheet, input: "An epsilon GRSpreadsheet match")
 }
