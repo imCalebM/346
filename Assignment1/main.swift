@@ -10,7 +10,6 @@
 
 import Foundation
 
-
 // If command line arguments are given, then try to interpret them as filenames, reading them and parsing them in sequence.
 // Note that output requested in the specification should be generated during the parsing process: for example, successfully parsing a Print will produce output. Your code should not produce any other output when parsing a string read from a file.
 if CommandLine.arguments.count>1 {
