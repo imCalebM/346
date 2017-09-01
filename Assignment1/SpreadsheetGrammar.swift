@@ -28,30 +28,43 @@ class GRSpreadsheet : GrammarRule {
     }
 }
 
-/// A GrammarRule for handling: Expression -> Integer ExpressionTail
-class GRExpression : GrammarRule {
-    let num = GRInteger()
-    let exprTail = GRExpressionTail()
+///// A GrammarRule for handling: Expression -> Integer ExpressionTail
+//class GRExpression : GrammarRule {
+//    let num = GRInteger()
+//    let exprTail = GRExpressionTail()
+//
+//    init(){
+//        super.init(rhsRule: [num,exprTail])
+//    }
+//    override func parse(input: String) -> String? {
+//        let rest = super.parse(input:input)
+//        if rest != nil {
+//            self.calculatedValue = num.calculatedValue! + exprTail.calculatedValue!
+//        }
+//        return rest
+//    }
+//}
 
+/// New GrammarRule for handling: Expression -> ProductTerm ExpressionTail | QuotedString
+class GRExpression : GrammarRule {
+    let exprTail = GRExpressionTail()
+    let prodTerm = GRProductTerm()
+    let strNoQ = GRStringNoQuote()
+    
     init(){
-        super.init(rhsRule: [num,exprTail])
+        super.init(rhsRules: [[prodTerm, exprTail], [strNoQ]])
     }
-    override func parse(input: String) -> String? {
-        let rest = super.parse(input:input)
-        if rest != nil {
-            self.calculatedValue = num.calculatedValue! + exprTail.calculatedValue!
-        }
-        return rest
-    }
+    
 }
 
-/// A GrammarRule for handling: ExpressionTail -> "+" Integer
+/// A GrammarRule for handling: ExpressionTail -> "+" ProductTerm ExpressionTail | Epsilon
 class GRExpressionTail : GrammarRule {
     let plus = GRLiteral(literal: "+")
     let num = GRInteger()
+    let prodTerm = GRProductTerm()
     
     init(){
-        super.init(rhsRule: [plus,num])
+        super.init(rhsRules: [[plus,prodTerm], [Epsilon.theEpsilon]])
     }
     
     override func parse(input: String) -> String? {
@@ -68,6 +81,45 @@ class GRExpressionTail : GrammarRule {
         }
         return nil
     }
+}
+
+// A GrammarRule for handling: ProductTerm -> Value ProductTermTail
+class GRProductTerm : GrammarRule {
+    let value = GRValue()
+    let prodTail = GRProductTermTail()
+    
+    init(){
+        super.init(rhsRules: [[value, prodTail]])
+    }
+}
+
+// A GrammarRule for handling: ProductTermTail -> "*" Value ProductTermTail | Epsilon
+class GRProductTermTail : GrammarRule {
+    let multiply = GRLiteral(literal: "*")
+    let num = GRInteger()
+    init(){
+        super.init(rhsRules: [[multiply, num], [Epsilon.theEpsilon]])
+        
+    }
+    override func parse(input: String) -> String? {
+        if let rest = super.parse(input: input){
+            self.calculatedValue = Int(num.stringValue!)
+            
+            if (rest != "") {
+                let prodTail = GRProductTermTail()
+                let rest = prodTail.parse(input: rest)
+                
+                if rest != nil {
+                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
+                }
+                
+            }
+            return rest
+        }
+        return nil
+        
+    }
+    
 }
 
 // A GrammarRule for handling Value -> CellReference | Integer

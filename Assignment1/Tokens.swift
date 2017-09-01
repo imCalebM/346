@@ -85,5 +85,12 @@ class GRRowNumber : Token {
     }
 }
 
+// A Token subcladd for parsing strings
+class GRStringNoQuote : Token {
+    init(){
+        // Matches a string with no single or double quotes (StringNoQuote)
+        super.init(regExpPattern: "^[^\'\"]*$")
+    }
+}
 
 
