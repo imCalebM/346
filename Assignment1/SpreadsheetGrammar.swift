@@ -57,8 +57,64 @@ class GRExpressionTail : GrammarRule {
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input) {
             self.calculatedValue =  Int(num.stringValue!)
+            if rest != ""{
+                let exprTail = GRExpressionTail()
+                let rest = exprTail.parse(input: rest)
+                if rest != nil{
+                    self.calculatedValue = self.calculatedValue! + exprTail.calculatedValue!
+                }
+            }
             return rest
         }
         return nil
     }
 }
+
+// A GrammarRule for handling Value -> CellReference | Integer
+class GRValue : GrammarRule{
+    let cellRef = GRCellReference()
+    let num = GRInteger()
+    
+    init(){
+        super.init(rhsRules: [[cellRef],[num]])
+    }
+}
+
+// A GrammarRule for handling CellReference -> AbsoluteCell | Relative Cell
+class GRCellReference : GrammarRule {
+    let absCell = GRAbsoluteCell()
+    let relCell = GRRelativeCell()
+    
+    init(){
+        super.init(rhsRules: [[absCell], [relCell]])
+    }
+}
+
+/// A GrammarRule for handling AbsoluteCell -> ColumnLabel RowNumber
+class GRAbsoluteCell : GrammarRule {
+    let col = GRColumnLabel()
+    let row = GRRowNumber()
+    
+    init() {
+        super.init(rhsRule: [col,row])
+    }
+}
+
+/// A GrammarRule for handling RelativeCell -> "r" Integer "c" Integer
+class GRRelativeCell : GrammarRule {
+    let row = GRLiteral(literal: "r")
+    let col = GRLiteral(literal: "c")
+    let rowNum = GRInteger()
+    let colNum = GRInteger()
+    
+    init(){
+        super.init(rhsRule: [row, rowNum, col, colNum])
+    }
+}
+
+
+
+
+
+
+

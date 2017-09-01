@@ -69,23 +69,21 @@ class GRLiteral : Token {
     }
 }
 
-///// A Token subclass for parsing column labels NOT RIGHT
-//class GRColumnLabel : Token {
-//    init(columnLabel:String){
-//        super.init(regExpPattern: "([A-Z]+(?!0-9))")
-//    }
-//}
-//
-///// A Token subclass for parsing row numbers NOT RIGHT
-//class GRRowNumber : Token {
-//    init(rowNumber:String){
-//        super.init(regExpPattern: "(?![A-Z])[0-9]+")
-//    }
-//}
-//
-//// A Token subclass for parsing a string only containing uppercase letters
-//class GRUpperAlphaString : Token {
-//    init(alphaString:String){
-//        super.init(regExpPattern: "[A-Z]+")
-//    }
-//}
+/// A Token subclass for parsing column labels
+class GRColumnLabel : Token {
+    init(){
+        // Matches 1 or more capital letter (UpperAlphaString)
+        super.init(regExpPattern: "([A-Z]+)")
+    }
+}
+
+/// A Token subclass for parsing row numbers
+class GRRowNumber : Token {
+    init(){
+        // Matches 1 or more integers greater than 0 (PositiveInteger)
+        super.init(regExpPattern: "[1-9]+[0-9]*")
+    }
+}
+
+
+
