@@ -47,12 +47,12 @@ class GRSpreadsheet : GrammarRule {
 
 /// New GrammarRule for handling: Expression -> ProductTerm ExpressionTail | QuotedString
 class GRExpression : GrammarRule {
-    let exprTail = GRExpressionTail()
     let prodTerm = GRProductTerm()
-    let strNoQ = GRStringNoQuote()
+    let exprTail = GRExpressionTail()
+    let quotedString = GRQuotedString()
     
     init(){
-        super.init(rhsRules: [[prodTerm, exprTail], [strNoQ]])
+        super.init(rhsRules: [[prodTerm, exprTail], [quotedString]])
     }
     
 }
@@ -60,7 +60,6 @@ class GRExpression : GrammarRule {
 /// A GrammarRule for handling: ExpressionTail -> "+" ProductTerm ExpressionTail | Epsilon
 class GRExpressionTail : GrammarRule {
     let plus = GRLiteral(literal: "+")
-    let num = GRInteger()
     let prodTerm = GRProductTerm()
     
     init(){
@@ -69,7 +68,7 @@ class GRExpressionTail : GrammarRule {
     
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input) {
-            self.calculatedValue =  Int(num.stringValue!)
+            self.calculatedValue =  Int(prodTerm.value.num.stringValue!)
             if rest != ""{
                 let exprTail = GRExpressionTail()
                 let rest = exprTail.parse(input: rest)
@@ -89,31 +88,36 @@ class GRProductTerm : GrammarRule {
     let prodTail = GRProductTermTail()
     
     init(){
-        super.init(rhsRules: [[value, prodTail]])
+        super.init(rhsRule: [value, prodTail])
     }
 }
 
 // A GrammarRule for handling: ProductTermTail -> "*" Value ProductTermTail | Epsilon
 class GRProductTermTail : GrammarRule {
     let multiply = GRLiteral(literal: "*")
-    let num = GRInteger()
+    let value = GRValue()
+    
     init(){
-        super.init(rhsRules: [[multiply, num], [Epsilon.theEpsilon]])
+        super.init(rhsRules: [[multiply, value], [Epsilon.theEpsilon]])
         
     }
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input){
-            self.calculatedValue = Int(num.stringValue!)
-            
-            if (rest != "") {
-                let prodTail = GRProductTermTail()
-                let rest = prodTail.parse(input: rest)
-                
-                if rest != nil {
-                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
-                }
-                
+            if(value.num.stringValue != nil){
+                self.calculatedValue = Int(value.num.stringValue!)
+            } else {
+                self.calculatedValue = nil
             }
+            print("hi")
+//            if rest != ""{
+//                let prodTail = GRProductTermTail()
+//                let rest = prodTail.parse(input: rest)
+//                
+//                if rest != nil {
+//                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
+//                }
+//                
+//            }
             return rest
         }
         return nil
@@ -164,6 +168,15 @@ class GRRelativeCell : GrammarRule {
     }
 }
 
+///A GrammarRule for handling: QuotedString -> " StringNoQuote "
+class GRQuotedString : GrammarRule {
+    let quote = GRLiteral(literal: "\"")
+    let stringNoQ = GRStringNoQuote()
+    init(){
+        super.init(rhsRule: [quote, stringNoQ, quote])
+        
+    }
+}
 
 
 

@@ -83,12 +83,19 @@ if CommandLine.arguments.count>1 {
 //    testGrammarRule(rule: myCellReference, input: "r 1c 2")
 //    testGrammarRule(rule: myCellReference, input: " A 2 ")
 
-    let myValue = GRValue()
-    testGrammarRule(rule: myValue, input: "     r1c2 444444 +")
-    testGrammarRule(rule: myValue, input: "    121321")
-    testGrammarRule(rule: myValue, input: "    A12222222")
-    testGrammarRule(rule: myValue, input: "  AAA1")
+//    let myValue = GRValue()
+//    testGrammarRule(rule: myValue, input: "     r1c2 444444 +")
+//    testGrammarRule(rule: myValue, input: "    121321")
+//    testGrammarRule(rule: myValue, input: "    A12222222")
+//    testGrammarRule(rule: myValue, input: "  AAA1")
     
-    
+    let myExpression = GRExpression()
+    testGrammarRule(rule: myExpression, input: "1+1")
+    testGrammarRule(rule: myExpression, input: "hello")
+    testGrammarRule(rule: myExpression, input: "A1")
+    testGrammarRule(rule: myExpression, input: "r4c7")
+    testGrammarRule(rule: myExpression, input: "1*4")
+    testGrammarRule(rule: myExpression, input: "A1 + 4")
+    testGrammarRule(rule: myExpression, input: " ")
     
 }
