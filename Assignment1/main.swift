@@ -90,7 +90,7 @@ if CommandLine.arguments.count>1 {
 //    testGrammarRule(rule: myValue, input: "  AAA1")
     
     let myExpression = GRExpression()
-    testGrammarRule(rule: myExpression, input: "1+1")
+    testGrammarRule(rule: myExpression, input: " 1 + 1")
     testGrammarRule(rule: myExpression, input: "hello")
     testGrammarRule(rule: myExpression, input: "A1")
     testGrammarRule(rule: myExpression, input: "r4c7")

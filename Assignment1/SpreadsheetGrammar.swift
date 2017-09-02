@@ -68,7 +68,10 @@ class GRExpressionTail : GrammarRule {
     
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input) {
-            self.calculatedValue =  Int(prodTerm.value.num.stringValue!)
+            // make sure we're not unwrapping nil
+            if let int = prodTerm.value.num.stringValue {
+                self.calculatedValue =  Int(int)
+            }
             if rest != ""{
                 let exprTail = GRExpressionTail()
                 let rest = exprTail.parse(input: rest)
@@ -103,21 +106,19 @@ class GRProductTermTail : GrammarRule {
     }
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input){
-            if(value.num.stringValue != nil){
-                self.calculatedValue = Int(value.num.stringValue!)
-            } else {
-                self.calculatedValue = nil
+            // make sure we're not unwrapping nil
+            if let int = value.num.stringValue {
+                self.calculatedValue = Int(int)
             }
-            print("hi")
-//            if rest != ""{
-//                let prodTail = GRProductTermTail()
-//                let rest = prodTail.parse(input: rest)
-//                
-//                if rest != nil {
-//                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
-//                }
-//                
-//            }
+            if rest != ""{
+                let exprTail = GRExpression()
+                let rest = exprTail.parse(input: rest)
+                let prodTail = GRProductTermTail()
+                if rest != nil {
+                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
+                }
+                
+            }
             return rest
         }
         return nil
