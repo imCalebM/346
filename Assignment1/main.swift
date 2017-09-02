@@ -46,34 +46,34 @@ if CommandLine.arguments.count>1 {
         }
     }
 
-//    print("--- Test GRInteger parsing")
-//    let myGRInteger = GRInteger()
-//    // should parse the complete string
-//    testGrammarRule(rule: myGRInteger,input:"2")
-//    // should parse just the initial integer
-//    testGrammarRule(rule: myGRInteger,input:"  1200r3f")
-//    // should not be able to be parsed
-//    testGrammarRule(rule: myGRInteger,input:"NaN")
-//
-//    print("--- Test GRLiteral parsing")
-//    let bGRLiteral = GRLiteral(literal: "b")
-//    testGrammarRule(rule: bGRLiteral,input:"2")
-//    testGrammarRule(rule: bGRLiteral,input:" b+a")
-//
-//    print("--- Test GRExpression parsing")
-//    let myExpr = GRExpression()
-//    testGrammarRule(rule: myExpr, input: " 1+ 2 +4+5 ")
-//    if let result = myExpr.parse(input: " 1 + 2+4+5 ") {
-//        // if the parsing was successful, then an GRExpression should contain a calculatedValue, hence the (not ideal) unsafe optional forcing here.
-//        print("myExpr.calculatedValue is \(myExpr.calculatedValue!)")
-//    }
-//
+    print("--- Test GRInteger parsing")
+    let myGRInteger = GRInteger()
+    // should parse the complete string
+    testGrammarRule(rule: myGRInteger,input:"2")
+    // should parse just the initial integer
+    testGrammarRule(rule: myGRInteger,input:"  1200r3f")
+    // should not be able to be parsed
+    testGrammarRule(rule: myGRInteger,input:"NaN")
+
+    print("--- Test GRLiteral parsing")
+    let bGRLiteral = GRLiteral(literal: "b")
+    testGrammarRule(rule: bGRLiteral,input:"2")
+    testGrammarRule(rule: bGRLiteral,input:" b+a")
+
+    print("--- Test GRExpression parsing")
+    let myExpr = GRExpression()
+    testGrammarRule(rule: myExpr, input: " 1+ 2 +4*5 ")
+    if let result = myExpr.parse(input: " 1 + 2+4*5 ") {
+        // if the parsing was successful, then an GRExpression should contain a calculatedValue, hence the (not ideal) unsafe optional forcing here.
+        print("myExpr.calculatedValue is \(myExpr.calculatedValue!)")
+    }
+
 //    print("--- Test GRSpreadsheet parsing")
 //    let mySpreadsheet = GRSpreadsheet()
 //    testGrammarRule(rule: mySpreadsheet, input: "A1 := 2")
 //    testGrammarRule(rule: mySpreadsheet, input: "An epsilon GRSpreadsheet match")
 //    
-    
+//    
 //    let myAbsoluteCell = GRAbsoluteCell()
 //    testGrammarRule(rule: myAbsoluteCell, input: "A2 A2 A3")
 //    
@@ -83,11 +83,11 @@ if CommandLine.arguments.count>1 {
 //    testGrammarRule(rule: myCellReference, input: "r 1c 2")
 //    testGrammarRule(rule: myCellReference, input: " A 2 ")
 
-//    let myValue = GRValue()
-//    testGrammarRule(rule: myValue, input: "     r1c2 444444 +")
-//    testGrammarRule(rule: myValue, input: "    121321")
-//    testGrammarRule(rule: myValue, input: "    A12222222")
-//    testGrammarRule(rule: myValue, input: "  AAA1")
+    let myValue = GRValue()
+    testGrammarRule(rule: myValue, input: "     r1c2 444444 +")
+    testGrammarRule(rule: myValue, input: "    121321")
+    testGrammarRule(rule: myValue, input: "    A12222222")
+    testGrammarRule(rule: myValue, input: "  AAA1")
     
     let myExpression = GRExpression()
     testGrammarRule(rule: myExpression, input: "1+1")

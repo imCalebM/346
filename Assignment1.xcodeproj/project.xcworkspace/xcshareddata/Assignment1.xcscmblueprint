@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AF7E1EA43BDA6257B99B9816D87A2D54B2BBFB3B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AECBE132E15FC0541E45A08208A7E27EA0C74E67" : 9223372036854775807,
+    "AF7E1EA43BDA6257B99B9816D87A2D54B2BBFB3B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FF1F2265-45DF-47D2-9289-2AD9F58C0C48",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AECBE132E15FC0541E45A08208A7E27EA0C74E67" : "",
+    "AF7E1EA43BDA6257B99B9816D87A2D54B2BBFB3B" : "346\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Assignment1",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Assignment1.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/imCalebM\/346.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AECBE132E15FC0541E45A08208A7E27EA0C74E67"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "imcalebm",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AF7E1EA43BDA6257B99B9816D87A2D54B2BBFB3B"
+    }
+  ]
+}

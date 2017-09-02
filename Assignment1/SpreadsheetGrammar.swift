@@ -103,21 +103,20 @@ class GRProductTermTail : GrammarRule {
     }
     override func parse(input: String) -> String? {
         if let rest = super.parse(input: input){
-            if(value.num.stringValue != nil){
-                self.calculatedValue = Int(value.num.stringValue!)
+            if let int = value.num.stringValue {
+                self.calculatedValue = Int(int)
             } else {
                 self.calculatedValue = nil
             }
-            print("hi")
-//            if rest != ""{
-//                let prodTail = GRProductTermTail()
-//                let rest = prodTail.parse(input: rest)
-//                
-//                if rest != nil {
-//                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
-//                }
-//                
-//            }
+            let exprTail = GRExpressionTail()
+                if rest != ""{
+                    let rest = exprTail.parse(input: rest)
+                    let prodTail = GRProductTermTail()
+                if rest != nil {
+                    self.calculatedValue = self.calculatedValue! * prodTail.calculatedValue!
+                }
+                
+            }
             return rest
         }
         return nil
